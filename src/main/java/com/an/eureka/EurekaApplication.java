@@ -1,4 +1,4 @@
-package com.tlong.eureka;
+package com.an.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
