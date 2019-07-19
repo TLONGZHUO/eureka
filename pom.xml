@@ -9,15 +9,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.tlong</groupId>
+    <groupId>com.an</groupId>
     <artifactId>eureka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eureka</name>
     <description>Eureka Server</description>
 
     <properties>
+        <skipTests>true</skipTests>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -68,18 +69,6 @@
         </snapshotRepository>
     </distributionManagement>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>snapshots</id>-->
-<!--            <name>maven-public</name>-->
-<!--            <url>http://47.106.255.139:8081/repository/maven-snapshots/</url>-->
-<!--        </repository>-->
-<!--        <repository>-->
-<!--            <id>releases</id>-->
-<!--            <name>maven-public</name>-->
-<!--            <url>http://47.106.255.139:8081/repository/maven-releases/</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
     <!-- 下载-->
     <repositories>
         <repository>
