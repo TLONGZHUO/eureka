@@ -5,6 +5,10 @@ spring:
     admin:
       client:
         url: http://localhost:8089
+  security:
+    user:
+      name: admin
+      password: admin123456
 
 server:
   port: 8761 #服务注册中心端口号
@@ -16,8 +20,10 @@ eureka:
     registerWithEureka: false #是否向服务注册中心注册自己
     fetchRegistry: false #是否检索服务
     serviceUrl: #服务注册中心的配置内容，指定服务注册中心的位置
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+      instance:
+        leaseRenewalIntervalInSeconds: 10
+        health-check-url-path: http://localhost:${server.port}/actuator/health
 
 # 在admin中允许扫描项目信息
 management:
