@@ -23,17 +23,21 @@ eureka:
     #禁用readOnlyCacheMap
     use-read-only-response-cache: false
   instance:
-#    hostname: eureka-server #服务注册中心IP地址
-    hostname: 127.0.0.1 #服务注册中心IP地址
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+    hostname: eureka-server #服务注册中心IP地址
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: http://eureka-server:${server.port}/actuator/health
+  #        health-check-url-path: http://localhost:${server.port}/actuator/health
+#    hostname: 127.0.0.1 #服务注册中心IP地址
   client:
-    registerWithEureka: false #是否向服务注册中心注册自己
-    fetchRegistry: false #是否检索服务
+    registerWithEureka: true #是否向服务注册中心注册自己
+    fetchRegistry: true #是否检索服务
     serviceUrl: #服务注册中心的配置内容，指定服务注册中心的位置
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
       instance:
-        leaseRenewalIntervalInSeconds: 10
-        health-check-url-path: http://eureka-server:${server.port}/actuator/health
-#        health-check-url-path: http://localhost:${server.port}/actuator/health
+
 
 # 在admin中允许扫描项目信息
 management:
