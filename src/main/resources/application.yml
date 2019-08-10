@@ -4,17 +4,26 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8089
+        url: http://admin-server:8089
   security:
     user:
       name: admin
       password: admin123456
 
 server:
-  port: 8761 #服务注册中心端口号
+      port: 8761 #服务注册中心端口号
 
 eureka:
+  server:
+    #中小规模下，自我保护模式坑比好处多，所以关闭它
+    enable-self-preservation: false
+    #主动失效检测间隔,配置成5秒
+    eviction-interval-timer-in-ms: 5000
+    response-cache-update-interval-ms: 3000
+    #禁用readOnlyCacheMap
+    use-read-only-response-cache: false
   instance:
+#    hostname: eureka-server #服务注册中心IP地址
     hostname: 127.0.0.1 #服务注册中心IP地址
   client:
     registerWithEureka: false #是否向服务注册中心注册自己
@@ -23,7 +32,8 @@ eureka:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
       instance:
         leaseRenewalIntervalInSeconds: 10
-        health-check-url-path: http://localhost:${server.port}/actuator/health
+        health-check-url-path: http://eureka-server:${server.port}/actuator/health
+#        health-check-url-path: http://localhost:${server.port}/actuator/health
 
 # 在admin中允许扫描项目信息
 management:
@@ -35,3 +45,6 @@ management:
     health:
       show-details: ALWAYS
 
+ribbon:
+  eureka:
+    enabled: true
